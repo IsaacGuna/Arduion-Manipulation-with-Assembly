@@ -34,18 +34,16 @@ swapnybble: mov r22, r18
 
       and r22, r16
       and r18, r17
-      ldi r23, 0x03
+      ldi r23, 0x04
       
-      lsl r22
-      lsl r22
-      lsl r22
-      lsl r22
-      lsr r18
-      lsr r18
-      lsr r18
-      lsr r18
+loop4: dec r23
+       lsl r22
+       lsr r18
+       cpi r23, 0
+       brne loop4
+       rjmp exit
      
-	or r18, r22
+exit: 	or r18, r22
 	ret
 	
 delay: nop
@@ -68,5 +66,4 @@ loop:   nop
       
       
 mainloop: rjmp mainloop
-
 
