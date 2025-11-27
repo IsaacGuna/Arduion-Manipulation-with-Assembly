@@ -81,8 +81,10 @@ multiple5:
       call turnoff200ms
       call display5
       call interwordspace
-      
-     cpi r24, r23 ; compare counter with max limit - 50 to see if it has reached the limit
+
+     mov r27, r24  
+     sub r27, r23 ;compare counter with max limit - 50 to see if it has reached the limit
+     cpi r27, 0
      brne divloop
       
 
@@ -94,12 +96,16 @@ multiple5:
 leftshift:
       lsl r22
       call outputdelay1s
-      cpi r22, r24
+      mov r27, r22
+      sub r27, r24
+      cpi r27, 0
       brne leftshift
 rightshift: 
       lsr r22
       call outputdelay1s
-      cpi r22, r23
+      mov r27, r22
+      sub r27, r23
+      cpi r27, 0
       brne rightshift
       rjmp leftshift
       
@@ -248,15 +254,15 @@ nest1:                ;r20 * (r19 * 2) + 3 = 33152
        ldi r19, 128   ;33152/16,000,000 = 2.072 * 10^-3 = 2ms  
 nest0:                ;inner most loop does 256 cycles
        dec r19
-	   cpi r19, 0
-	   brne loop
-	   cpi r20, 0
-	   brne nest1
+	 cpi r19, 0
+	 brne nest0
+	 cpi r20, 0
+	 brne nest1
        cpi r21, 0
        brne nest2
        cpi r18, 0
        brne delay    ;decides how many 2ms delays to do
-	   ret
+	 ret
 
 
 mainloop: rjmp mainloop
