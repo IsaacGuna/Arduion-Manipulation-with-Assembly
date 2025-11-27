@@ -1,4 +1,4 @@
-# Arduion-Manipulation-with-Assembly
+# Arduino-Manipulation-with-Assembly
 
 As a part of a really hands-on module Computer Systems, I have the delight of working with Arduinos, using assembly language to configure LEDs to represent information. 
 
